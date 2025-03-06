@@ -1,0 +1,46 @@
+KEY_CODE = 5  --启动按键编号
+KEY_OFF = 4  --中断按键编号
+MACRO_LONG_PRESS = "恰斯卡11炮-62"   --长按宏名
+MACRO_SHORT_PRESS = "恰斯卡14炮" --短按宏名
+MACRO_RUNNING_TIME = 12000 -- 运行时间上限用于判断
+ShortRunningTime = 0  --短按执行时间
+LongRunningTime = 0  --长按执行时间
+
+EnablePrimaryMouseButtonEvents(true)
+function OnEvent(event, arg)
+  if event == "MOUSE_BUTTON_PRESSED" and arg == KEY_CODE then
+     if ShortRunningTime == 0 or (GetRunningTime() - ShortRunningTime > MACRO_RUNNING_TIME) then
+        ShortRunningTime = GetRunningTime()
+        PressKey("E")
+        Sleep(30)  --若出现E后直接下落攻击，则增大此延迟数值
+        ReleaseKey("E")
+        PressMouseButton(1)
+        Sleep(510)
+        ReleaseMouseButton(1)
+        Sleep(10)  --若出现E后开一炮就没有后续动作了，则增大此延迟数值
+        if IsMouseButtonPressed(KEY_CODE) then
+           ShortRunningTime = GetRunningTime()
+           LongRunningTime = GetRunningTime()
+           PlayMacro(MACRO_LONG_PRESS)
+        else 
+           PlayMacro(MACRO_SHORT_PRESS)
+        end
+     else
+        ShortRunningTime = 0
+        LongRunningTime = 0
+        AbortMacro() 
+     end
+  end  
+  if event == "MOUSE_BUTTON_RELEASED" and arg == KEY_CODE then
+     if LongRunningTime > 0 then
+        ShortRunningTime = 0
+        LongRunningTime = 0
+        AbortMacro()     
+     end
+  end
+  if event == "MOUSE_BUTTON_PRESSED" and arg == KEY_OFF then
+     ShortRunningTime = 0
+     LongRunningTime = 0
+     AbortMacro()  --后退键中断功能，不需要可以删除     
+  end
+end
