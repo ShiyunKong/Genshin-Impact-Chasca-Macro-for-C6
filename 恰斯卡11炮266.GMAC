@@ -1,0 +1,36 @@
+Press,E,18,69
+Delay,10
+Release,E,18,69
+Delay,5
+Press,Left Click,301,301
+Delay,480
+Release,Left Click,301,301
+Delay,5
+Press,Left Click,301,301
+Delay,2250
+Release,Left Click,301,301
+Delay,5
+Press,Left Click,301,301
+Delay,750
+Release,Left Click,301,301
+Delay,5
+Press,Left Click,301,301
+Delay,2250
+Release,Left Click,301,301
+Delay,5
+Press,Left Click,301,301
+Delay,750
+Release,Left Click,301,301
+Delay,5
+Press,Left Click,301,301
+Delay,2250
+Release,Left Click,301,301
+Delay,5
+Press,Left Click,301,301
+Delay,750
+Release,Left Click,301,301
+Delay,5
+Press,Left Click,301,301
+Delay,500
+Release,Left Click,301,301
+1
